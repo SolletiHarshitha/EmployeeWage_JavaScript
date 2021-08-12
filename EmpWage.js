@@ -1,4 +1,4 @@
-//UC 2 - Calculating Employee Wage
+//UC 3 - Refactoring the code to Calculating Employee Wage
 const IS_ABSENT=0;
 const WAGE_PER_HR=20;
 const IS_PART_TIME=1;
@@ -12,15 +12,19 @@ if(empCheck==IS_ABSENT){
 else{
     console.log("Employee is Present");
 }
+empHrs=getWorkingHrs(empCheck);
+let empWage=empHrs*WAGE_PER_HR;
+console.log("Employee Wage : "+empWage);
+function getWorkingHrs(empCheck){
 switch(empCheck){
     case IS_PART_TIME:
         empHrs=4;
-        break;
+        return empHrs;
     case IS_FULL_TIME:
         empHrs=8;
-        break;
+        return empHrs;
     default:
-        empHrs=0;
+        return 0;
 }
-let empWage=empHrs*WAGE_PER_HR;
-console.log("Employee Wage : "+empWage);
+}
+
