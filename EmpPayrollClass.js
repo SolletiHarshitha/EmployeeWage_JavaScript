@@ -1,9 +1,5 @@
 class EmployeePayrollData{
-    id;
-    salary;
-    gender;
-    startDate;
-
+    
     constructor(...params) {
         this.id = params[0];
         this.name = params[1];
@@ -12,6 +8,14 @@ class EmployeePayrollData{
         this.startDate = params[4];
     }
 
+    get id() { return this._id; }
+    set id(id){
+        if(id > 0)
+        this._id = id;
+        else
+        throw 'Invalid Id';
+    }
+    
     get name() { return this._name; }
     set name(name) { 
         let nameRegex = RegExp('^[A-Z]{1}[a-z]{3,}$');
@@ -19,6 +23,31 @@ class EmployeePayrollData{
         this._name=name;
         else
         throw 'Name is Incorrect!';
+    }
+
+    get salary() { return this._salary; }
+    set salary(salary){
+        if(salary > 0)
+        this._salary = salary;
+        else
+        throw 'Invalid Salary';
+    }
+    
+    get gender() { return this._gender; }
+    set gender(gender){
+        let genderRegex = RegExp('^[MF]{1}$');
+        if(genderRegex.test(gender))
+        this._gender = gender;
+        else
+        throw 'Invalid Gender';
+    }
+
+    get startDate() { return this._startDate; }
+    set startDate(startDate){
+        if(startDate <= new Date())
+        this._startDate = startDate;
+        else
+        throw 'Invalid Date';
     }
 
     toString() {
@@ -29,14 +58,12 @@ class EmployeePayrollData{
                 ",gender=" + this.gender + ",startDate=" + this.startDate;
     }
 }
-let employeePayrollData = new EmployeePayrollData(1, "Kalpana", 45000);
+let employeePayrollData = new EmployeePayrollData(1, "Kalpana", 45000, "F", new Date());
 console.log(employeePayrollData.toString());
 try{
-    employeePayrollData.name="kalyani";
-    console.log(employeePayrollData.toString());
+    let newEmployeePayrollData = new EmployeePayrollData(2, "Arjun", 0, "M", new Date());
+    console.log(newEmployeePayrollData.toString());
 }
 catch(e){
     console.error(e);
 }
-let newEmployeePayrollData = new EmployeePayrollData(2, "Arjun", 30000, "M", new Date());
-console.log(newEmployeePayrollData.toString());
