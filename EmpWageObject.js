@@ -41,3 +41,21 @@ function getWorkingHrs(empCheck){
 function calculateDailyWage(empHrs){
     return empHrs*WAGE_PER_HR;
 }
+
+let totalWages =empDailyHrsAndWageArray.filter(dailyHrsAndWage => dailyHrsAndWage.dailyWage > 0)
+                 .reduce((totalWages,dailyHrsAndWage) => totalWages += dailyHrsAndWage.dailyWage, 0);
+let totalHours =empDailyHrsAndWageArray.filter(dailyHrsAndWage => dailyHrsAndWage.dailyWage > 0)
+                 .reduce((totalHours,dailyHrsAndWage) => totalHours += dailyHrsAndWage.dailyHours, 0);
+console.log("\nUC11A - Total Hours : "+totalHours+" Total Wages : "+totalWages);
+
+console.log("\nUC11B - Logging Full Working Days");
+empDailyHrsAndWageArray.filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours == 8)
+                       .forEach(dailyHrsAndWage => process.stdout.write(dailyHrsAndWage.toString()));
+
+let partWorkingDayStrArr = empDailyHrsAndWageArray.filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours == 4)
+                            .map(dailyHrsAndWage => dailyHrsAndWage.toString());
+console.log("\nUC11C - Part Time Working Days :"+partWorkingDayStrArr);
+
+let nonWorkingDayNum = empDailyHrsAndWageArray.filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours == 0)
+                        .map(dailyHrsAndWage => dailyHrsAndWage.dayNum);
+console.log("\nUC11D - Non Working Days : "+nonWorkingDayNum);
